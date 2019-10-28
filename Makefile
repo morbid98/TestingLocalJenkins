@@ -1,3 +1,3 @@
 .PHONY: echo
- echo:
-  @echo "hui"
+echo:
+	@echo "hui"

@@ -1,0 +1,5 @@
+FROM rbahatyrou/golang-slave
+
+RUN apk add --update make
+ENTRYPOINT ["jenkins-slave"]
+
