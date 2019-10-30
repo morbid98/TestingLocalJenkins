@@ -12,10 +12,6 @@ spec:
     volumeMounts:
       - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
-  - name: golang
-    image: golang:1.8.0
-    command: ['cat']
-    tty: true
   volumes:
   - name: jenkins-docker-cfg
     projected:
