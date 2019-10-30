@@ -29,7 +29,7 @@ spec:
 		      }
 		    }
       stage('Get a Golang project') {
-          git url: 'https://github.com/hashicorp/terraform.git'
+          git url: 'https://github.com/hashicorp/packer.git'
           container('golang') {
               stage('Build a Go project') {
                   sh """
