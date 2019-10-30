@@ -13,6 +13,10 @@ spec:
     volumeMounts:
       - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
+  - name: golang
+    image: golang:1.8.0
+    command: ['cat']
+    tty: true
   volumes:
   - name: jenkins-docker-cfg
     projected:
@@ -24,26 +28,24 @@ spec:
               path: config.json
 """
   ] 
-
     node(POD_LABEL) {
-        stage('Build with Kaniko') {
-      		git 'https://github.com/jenkinsci/docker-jnlp-slave.git'
-      		container('kaniko') {
-        		sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage'
-		      }
-		    }
+      stage('Build with Kaniko') {
+    		git 'https://github.com/jenkinsci/docker-jnlp-slave.git'
+    		container('kaniko') {
+      		sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage'
+	      }
+	    }
 
-        stage('Get a Golang project') {
-            git url: 'https://github.com/hashicorp/terraform.git'
-            container('golang') {
-                stage('Build a Go project') {
-                    sh """
-                    mkdir -p /go/src/github.com/hashicorp
-                    ln -s `pwd` /go/src/github.com/hashicorp/terraform
-                    cd /go/src/github.com/hashicorp/terraform && make core-dev
-                    """
-                }
-            }
-        }
-
-    }
+      stage('Get a Golang project') {
+          git url: 'https://github.com/hashicorp/terraform.git'
+          container('golang') {
+              stage('Build a Go project') {
+                  sh """
+                  mkdir -p /go/src/github.com/hashicorp
+                  ln -s `pwd` /go/src/github.com/hashicorp/terraform
+                  cd /go/src/github.com/hashicorp/terraform && make core-dev
+                  """
+              		}
+	          		}
+				      }
+				    }
