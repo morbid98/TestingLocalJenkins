@@ -34,8 +34,8 @@ spec:
               stage('Build a Go project') {
                   sh """
                   mkdir -p /go/src/github.com/hashicorp
-                  ln -s `pwd` /go/src/github.com/hashicorp/terraform
-                  cd /go/src/github.com/hashicorp/terraform && make fmt && make bin
+                  ln -s `pwd` /go/src/github.com/hashicorp/packer
+                  cd /go/src/github.com/hashicorp/packer && make dev
                   """
               		}
 	          		}
