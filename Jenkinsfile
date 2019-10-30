@@ -23,7 +23,6 @@ spec:
             - key: .dockerconfigjson
               path: config.json
 """
-  )
   ] {
 
     node(POD_LABEL) {
