@@ -23,7 +23,7 @@ spec:
             - key: .dockerconfigjson
               path: config.json
 """
-  ] {
+  ] 
 
     node(POD_LABEL) {
         stage('Build with Kaniko') {
@@ -47,4 +47,3 @@ spec:
         }
 
     }
-}
