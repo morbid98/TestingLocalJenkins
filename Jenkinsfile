@@ -1,6 +1,5 @@
-podTemplate(containers: [
-    containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
-    yaml: """
+podTemplate(yaml: """
+apiVersion: v1
 kind: Pod
 spec:
   containers:
@@ -27,7 +26,7 @@ spec:
             - key: .dockerconfigjson
               path: config.json
 """
-  ] 
+  ) 
     node(POD_LABEL) {
       stage('Build with Kaniko') {
     		git 'https://github.com/jenkinsci/docker-jnlp-slave.git'
@@ -48,4 +47,4 @@ spec:
               		}
 	          		}
 				      }
-				    }
+				    } 
