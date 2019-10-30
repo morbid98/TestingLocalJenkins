@@ -11,9 +11,9 @@ spec:
     - name: dockersock
       mountPath: /var/run/docker.sock
   - name: golang
-		image: golang:1.8.0
-		command: ['cat']
-		tty: true
+    image: golang:1.8.0
+    command: ['cat']
+    tty: true
  	volumes:
   - name: dockersock
     hostPath:
